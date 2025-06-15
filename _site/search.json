@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "my-hdat9800-blog",
+    "section": "",
+    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJun 15, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "my-hdat9800-blog",
+    "section": "",
+    "text": "title: “Flight Delays Analysis”\nauthor: “Abdullah”\ndate: “2025-06-12”\ncategories: [nycflights13, ggplot2, dplyr]\nformat: html\n\n## Introduction\nThis post explores flight delays in NYC using the `nycflights13` dataset.\n## Analysis\n```{r}\nlibrary(dplyr)\nlibrary(nycflights13)\nlibrary(ggplot2)\ndelay &lt;- flights %&gt;%\ngroup_by(tailnum, carrier) %&gt;%\nsummarise(\ncount = n(),\ndist = mean(distance, na.rm = TRUE),\ndelay = mean(arr_delay, na.rm = TRUE)\n) %&gt;%\nfilter(count &gt; 20, dist &lt; 2000, carrier %in% c(‘UA’, ‘DL’, ‘AA’, ‘US’)) %&gt;%\nleft_join(airlines)\nggplot(delay, aes(dist, delay)) +\ngeom_point(aes(size = count), alpha = 0.5, color = “blue”) +\ngeom_smooth(color = “red”) +\nscale_size_area() +\nlabs(\nx = “Distance (miles)”,\ny = “Delay (minutes)”,\nsize = “# of flights”\n) +\nggtitle(“Flight delay”) +\nfacet_grid(. ~ name)\n##Conclusion\nFlight delays differ between airlines and distances. Some carriers show higher average delays than others.\nyaml\nCopyEdit"
+  },
+  {
+    "objectID": "posts/flight-delays/index.html",
+    "href": "posts/flight-delays/index.html",
+    "title": "my-hdat9800-blog",
+    "section": "",
+    "text": "title: “Flight Delays Analysis”\nauthor: “Abdullah”\ndate: “2025-06-12”\ncategories: [nycflights13, ggplot2, dplyr]\nformat: html\n\n## Introduction\nThis post explores flight delays in NYC using the `nycflights13` dataset. The aim is to analyze average arrival delays and flight distances for selected airlines.\n## Analysis\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\nlibrary(dplyr)\nlibrary(nycflights13)\nlibrary(ggplot2)\n```\n```{r}\ndelay &lt;- flights %&gt;%\ngroup_by(tailnum, carrier) %&gt;%\nsummarise(\ncount = n(),\ndist = mean(distance, na.rm = TRUE),\ndelay = mean(arr_delay, na.rm = TRUE)\n) %&gt;%\nfilter(count &gt; 20, dist &lt; 2000, carrier %in% c(‘UA’, ‘DL’, ‘AA’, ‘US’)) %&gt;%\nleft_join(airlines)\n```\n```{r}\nggplot(delay, aes(dist, delay)) +\ngeom_point(aes(size = count), alpha = 0.5, color = “blue”) +\ngeom_smooth(color = “red”) +\nscale_size_area() +\nlabs(\nx = “Distance (miles)”,\ny = “Delay (minutes)”,\nsize = “# of flights”\n) +\nggtitle(“Flight delay”) +\nfacet_grid(. ~ name)\n```\n## Conclusion\nThe plot shows variations in flight delays across different airlines and distances. Some carriers experience longer average delays, while others maintain more consistent performance over different flight lengths."
+  }
+]

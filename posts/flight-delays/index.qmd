@@ -1,0 +1,83 @@
+---
+
+title: "Flight Delays Analysis"
+
+author: "Abdullah"
+
+date: "2025-06-12"
+
+categories: \[nycflights13, ggplot2, dplyr\]
+
+format: html
+
+---
+
+\## Introduction
+
+This post explores flight delays in NYC using the \`nycflights13\` dataset. The aim is to analyze average arrival delays and flight distances for selected airlines.
+
+\## Analysis
+
+\`\`\`{r setup, include=FALSE}
+
+knitr::opts_chunk\$set(echo = TRUE)
+
+library(dplyr)
+
+library(nycflights13)
+
+library(ggplot2)
+
+\`\`\`
+
+\`\`\`{r}
+
+delay \<- flights %\>%
+
+group_by(tailnum, carrier) %\>%
+
+summarise(
+
+count = n(),
+
+dist = mean(distance, na.rm = TRUE),
+
+delay = mean(arr_delay, na.rm = TRUE)
+
+) %\>%
+
+filter(count \> 20, dist \< 2000, carrier %in% c('UA', 'DL', 'AA', 'US')) %\>%
+
+left_join(airlines)
+
+\`\`\`
+
+\`\`\`{r}
+
+ggplot(delay, aes(dist, delay)) +
+
+geom_point(aes(size = count), alpha = 0.5, color = "blue") +
+
+geom_smooth(color = "red") +
+
+scale_size_area() +
+
+labs(
+
+x = "Distance (miles)",
+
+y = "Delay (minutes)",
+
+size = "\# of flights"
+
+) +
+
+ggtitle("Flight delay") +
+
+facet_grid(. \~ name)
+
+\`\`\`
+
+\## Conclusion
+
+The plot shows variations in flight delays across different airlines and distances. Some carriers experience longer average delays, while others maintain more consistent performance over different flight lengths.
