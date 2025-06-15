@@ -81,3 +81,5 @@ facet_grid(. \~ name)
 \## Conclusion
 
 The plot shows variations in flight delays across different airlines and distances. Some carriers experience longer average delays, while others maintain more consistent performance over different flight lengths.
+
+usethis::use_git()
